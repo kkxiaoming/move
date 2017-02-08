@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    *{padding:0;margin:0;}
+    ul{list-style: none;width:400px;height:30px;position: relative;margin: 0 auto;}
+    ul li{width:98px;height:28px;background-color: coral;text-align: center;line-height: 28px;border:1px solid black;float:left;z-index: 2;}
+    ul .di{overflow: hidden;width:100px;height:5px;z-index: 1;background-color: mediumspringgreen;position: absolute;left:0;top: 24px;border: none;}
+</style>
+<script>
+    window.onload=function(){
+        var odiv=document.getElementsByTagName("ul")[0];
+        var ali=odiv.getElementsByTagName("li");
+        var bg=ali[ali.length-1];
+        for(i=0;i<ali.length-1;i++){
+            ali[i].timer=null;
+            ali[i].onmouseover=function(){
+                startmove(bg,this.offsetLeft);
+            }
+        }
+    }
+    var speed=0;
+    var left=0;
+    function startmove(obj,target){
+        clearInterval(obj.timer);
+        obj.timer=setInterval(function(){
+            speed=(target-obj.offsetLeft)/5;
+            speed*=0.7;
+            left+=speed;
+            if(Math.abs(speed)<1&&Math.abs(left-target)<1){
+                clearInterval(obj.timer);
+                obj.style.left=target+"px";
+            }else{
+                obj.style.left=left+"px";
+            }
+
+        },30)
+    }
+</script>
+<body>
+<ul>
+    <li>首页</li>
+    <li>产品</li>
+    <li>售后服务</li>
+    <li>联系我们</li>
+    <li class="di"></li>
+</ul>
+</body>
+</html># xunhuan
